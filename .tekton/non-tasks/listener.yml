@@ -79,43 +79,6 @@ spec:
 
 ---
 apiVersion: tekton.dev/v1beta1
-kind: EventListener
-metadata:
-  name: github-commit-backend
-spec:
-  triggers:
-    - binding:
-        name: github-commit-backend
-      template:
-        name: trigger-template-backend
-
----
-apiVersion: tekton.dev/v1beta1
-kind: TriggerBinding
-metadata:
-  name: grit-or-gitlab-commit-backend
-spec:
-  params:
-    - name: repository
-      value: "$(event.repository.git_http_url)"
-    - name: branch
-      value: "$(event.ref)"
-    - name: revision
-      value: "$(event.checkout_sha)"
----
-apiVersion: tekton.dev/v1beta1
-kind: EventListener
-metadata:
-  name: grit-or-gitlab-commit-backend
-spec:
-  triggers:
-    - binding:
-        name: grit-or-gitlab-commit-backend
-      template:
-        name: trigger-template-backend
-
----
-apiVersion: tekton.dev/v1beta1
 kind: TriggerTemplate
 metadata:
   name: trigger-template-backend-tenant
@@ -268,43 +231,7 @@ spec:
         name: trigger-template-frontend
 
 ---
-apiVersion: tekton.dev/v1beta1
-kind: EventListener
-metadata:
-  name: github-commit-frontend
-spec:
-  triggers:
-    - binding:
-        name: github-commit-frontend
-      template:
-        name: trigger-template-frontend
 
----
-apiVersion: tekton.dev/v1beta1
-kind: TriggerBinding
-metadata:
-  name: grit-or-gitlab-commit-frontend
-spec:
-  params:
-    - name: repository
-      value: "$(event.repository.git_http_url)"
-    - name: branch
-      value: "$(event.ref)"
-    - name: revision
-      value: "$(event.checkout_sha)"
----
-apiVersion: tekton.dev/v1beta1
-kind: EventListener
-metadata:
-  name: grit-or-gitlab-commit-frontend
-spec:
-  triggers:
-    - binding:
-        name: grit-or-gitlab-commit-frontend
-      template:
-        name: trigger-template-frontend
-
----
 apiVersion: tekton.dev/v1beta1
 kind: TriggerTemplate
 metadata:
