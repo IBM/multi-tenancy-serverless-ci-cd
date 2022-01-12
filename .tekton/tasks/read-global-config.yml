@@ -89,8 +89,9 @@ spec:
 
         ibmcloud cr login    
 
-        echo $TOOLCHAIN_DATA_PATH
-        TOOLCHAIN_GUID=$(cat $TOOLCHAIN_DATA_PATH | jq -r '.toolchain_guid')
+        echo ${TOOLCHAIN_DATA_PATH}
+        TOOLCHAIN_GUID=$(cat ${TOOLCHAIN_DATA_PATH} | jq -r '.toolchain_guid')
+        env
         echo "Toolchain ID"
         echo $TOOLCHAIN_GUID
   
