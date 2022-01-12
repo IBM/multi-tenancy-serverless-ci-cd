@@ -30,7 +30,7 @@ env-config
 #env configs
 local.env_tmp
 local.env-tmp
-
+readnik.md
 #appid configs
 add-redirecturis.json
 add-roles.json

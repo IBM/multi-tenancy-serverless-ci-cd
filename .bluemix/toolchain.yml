@@ -17,19 +17,16 @@ template:
           "/tree/" + $env.branch + ")"
     hosted_region: "" # this is set automatically by DevOps
 toolchain:
-  name: $env.toolchainName || 'multi-tenancy-toolchain-{{timestamp}}'
+  name: 'multi-tenancy-serverless-ci-cd-{{timestamp}}'
   template:
     getting_started:
       $ref: "#/messages/template.gettingStarted"
 services:
   repo:
-    # must do logic this way instead of
-    # `service_id: $env.source_provider || 'hostedgit'`
-    # or source_provider doesn't work
     service_id: >
       $env.source_provider ? $env.source_provider : 'hostedgit'
     parameters:
-      repo_name: '{{toolchain.name}}'
+      repo_name: 'multi-tenancy-{{timestamp}}'
       repo_url: >
         if ($env.type === 'link') {
           $env.app_repo
@@ -51,13 +48,69 @@ services:
           'https://{{template.info.hosted_region}}.git.cloud.ibm.com/ibm/multi-tenancy'
         }
       type: $env.type || 'clone'
-      has_issues: true
+      has_issues: false
+      enable_traceability: true
+  repo-backend:
+    service_id: >
+      $env.source_provider ? $env.source_provider : 'hostedgit'
+    parameters:
+      repo_name: 'multi-tenancy-backend-{{timestamp}}'
+      repo_url: >
+        if ($env.type === 'link') {
+          $env.app_repo
+        } else if ($env.sourceZipUrl) {
+          $env.sourceZipUrl
+        } else if ($env.template.info.hosted_region === "") {
+          'https://github.com/ibm/multi-tenancy-backend'
+        } else {
+          'https://{{template.info.hosted_region}}.git.cloud.ibm.com/ibm/multi-tenancy-backend'
+        }
+      source_repo_url: >
+        if ($env.type === 'fork' || $env.type === 'clone') {
+          $env.app_repo
+        } else if ($env.sourceZipUrl) {
+          $env.sourceZipUrl
+        } else if ($env.template.info.hosted_region === "") {
+          'https://github.com/ibm/multi-tenancy-backend'
+        } else {
+          'https://{{template.info.hosted_region}}.git.cloud.ibm.com/ibm/multi-tenancy-backend'
+        }
+      type: $env.type || 'clone'
+      has_issues: false
+      enable_traceability: true
+  repo-frontend:
+    service_id: >
+      $env.source_provider ? $env.source_provider : 'hostedgit'
+    parameters:
+      repo_name: 'multi-tenancy-frontend-{{timestamp}}'
+      repo_url: >
+        if ($env.type === 'link') {
+          $env.app_repo
+        } else if ($env.sourceZipUrl) {
+          $env.sourceZipUrl
+        } else if ($env.template.info.hosted_region === "") {
+          'https://github.com/ibm/multi-tenancy-frontend'
+        } else {
+          'https://{{template.info.hosted_region}}.git.cloud.ibm.com/ibm/multi-tenancy-frontend'
+        }
+      source_repo_url: >
+        if ($env.type === 'fork' || $env.type === 'clone') {
+          $env.app_repo
+        } else if ($env.sourceZipUrl) {
+          $env.sourceZipUrl
+        } else if ($env.template.info.hosted_region === "") {
+          'https://github.com/ibm/multi-tenancy-frontend'
+        } else {
+          'https://{{template.info.hosted_region}}.git.cloud.ibm.com/ibm/multi-tenancy-frontend'
+        }
+      type: $env.type || 'clone'
+      has_issues: false
       enable_traceability: true
   pipeline-repo:
     service_id: >
       $env.source_provider ? $env.source_provider : 'hostedgit'
     parameters:
-      repo_name: '{{toolchain.name}}-pipeline'
+      repo_name: '{{toolchain.name}}'
       repo_url: $env.repository
       source_repo_url: $env.services.pipeline-repo.parameters.repo_url
       type: 'clone'

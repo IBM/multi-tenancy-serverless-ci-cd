@@ -79,19 +79,6 @@ spec:
 
 ---
 apiVersion: tekton.dev/v1beta1
-kind: TriggerBinding
-metadata:
-  name: github-commit-backend
-spec:
-  params:
-    - name: repository
-      value: "$(event.repository.url)"
-    - name: branch
-      value: "$(event.ref)"
-    - name: revision
-      value: "$(event.head_commit.id)"
----
-apiVersion: tekton.dev/v1beta1
 kind: EventListener
 metadata:
   name: github-commit-backend
@@ -280,19 +267,6 @@ spec:
       template:
         name: trigger-template-frontend
 
----
-apiVersion: tekton.dev/v1beta1
-kind: TriggerBinding
-metadata:
-  name: github-commit-frontend
-spec:
-  params:
-    - name: repository
-      value: "$(event.repository.url)"
-    - name: branch
-      value: "$(event.ref)"
-    - name: revision
-      value: "$(event.head_commit.id)"
 ---
 apiVersion: tekton.dev/v1beta1
 kind: EventListener
