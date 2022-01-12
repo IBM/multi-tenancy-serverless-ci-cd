@@ -87,5 +87,10 @@ spec:
         ibmcloud target -g $IBM_CLOUD_RESOURCE_GROUP
         ibmcloud target -r $IBM_CLOUD_REGION
 
-        ibmcloud cr login       
+        ibmcloud cr login    
+
+        echo $TOOLCHAIN_DATA_PATH
+        TOOLCHAIN_GUID=$(cat $TOOLCHAIN_DATA_PATH | jq -r '.toolchain_guid')
+        echo "Toolchain ID"
+        echo $TOOLCHAIN_GUID
   
