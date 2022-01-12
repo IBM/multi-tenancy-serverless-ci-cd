@@ -64,6 +64,7 @@ spec:
         ibmcloud cr login
         ibmcloud cr namespace-add $REGISTRY_NAMESPACE
 
+        cat /cd-config/toolchain.json
         export TOOLCHAIN_ID=$(jq -r '.toolchain_guid' /cd-config/toolchain.json)
         #TOOLCHAIN_ID=$(params.app-name)
         echo $TOOLCHAIN_ID        
