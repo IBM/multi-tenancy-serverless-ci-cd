@@ -43,7 +43,7 @@ spec:
         - name: ibmcloud-apikey-secret-key
           value: "toolchain-apikey"
         - name: repository
-          value: $(tasks.extract-repository-url.results.extracted-value)
+          value: $(tasks.extract-repository-url.results.extracted-value)-backend
         - name: branch
           value: $(params.branch)
         - name: revision
