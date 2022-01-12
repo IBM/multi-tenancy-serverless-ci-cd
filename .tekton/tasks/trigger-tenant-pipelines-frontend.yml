@@ -68,7 +68,7 @@ spec:
         export TOOLCHAIN_NAME=$(jq -r '.name' /cd-config/toolchain.json)
         echo $TOOLCHAIN_NAME        
 
-        ALMOST_OTHER_PIPELINE_NAME=$(ibmcloud dev toolchain-get $TOOLCHAIN_NAME | grep "pipeline-frontend-tenant" -A 1 | grep -v "pipeline-frontend-tenant")
+        ALMOST_OTHER_PIPELINE_ID=$(ibmcloud dev toolchain-get $TOOLCHAIN_NAME | grep "pipeline-frontend-tenant" -A 1 | grep -v "pipeline-frontend-tenant")
         OTHER_PIPELINE_ID=$(echo $ALMOST_OTHER_PIPELINE_ID | cut -c5-40)
         echo $OTHER_PIPELINE_ID
 
