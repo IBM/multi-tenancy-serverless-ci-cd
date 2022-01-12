@@ -35,7 +35,7 @@ spec:
         #!/bin/bash
         echo "trigger-tenant-pipelines-backend"        
         set -x
-        cd $(workspaces.workspace-backend.path)
+        cd $(workspaces.workspace-backend.path)/multi-tenancy
         #example: https://github.com/IBM/multi-tenancy/blob/main/configuration/global.json
 
         export CONFIG_FILE="configuration/global.json"

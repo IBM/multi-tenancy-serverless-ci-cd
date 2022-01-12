@@ -119,9 +119,9 @@ spec:
         - name: image-name
           value: $(tasks.read-global-config.results.IMAGES_NAME_BACKEND)
         - name: path-to-context
-          value: "code/service-catalog"
+          value: "multi-tenancy-backend"
         - name: path-to-dockerfile
-          value: "code/service-catalog"
+          value: "multi-tenancy-backend"
         - name: additional-tags-script
           value: |
             # The script is providing tag(s) as output

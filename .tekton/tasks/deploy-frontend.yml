@@ -46,7 +46,7 @@ spec:
         #!/bin/bash
         echo "deploy-frontend"        
         set -x
-        cd $(workspaces.workspace-frontend-tenant.path)
+        cd $(workspaces.workspace-frontend-tenant.path)/multi-tenancy-frontend
 
         ibmcloud config --check-version false
         ibmcloud login -a $(params.ibmcloud-api) --no-region --apikey $API_KEY
@@ -65,8 +65,17 @@ spec:
 
         ibmcloud resource service-key $(params.APPID_SERVICE_KEY_NAME) --output JSON > ./appid-key-temp.json
 
-        APPID_CLIENT_ID=$(cat ./appid-key-temp.json | jq '.[].credentials.clientId' | sed 's/"//g' )
+        #APPID_CLIENT_ID=$(cat ./appid-key-temp.json | jq '.[].credentials.clientId' | sed 's/"//g' )
         APPID_APPLICATION_DISCOVERYENDPOINT=$(echo $result | sed -n 's|.*"discoveryEndpoint":"\([^"]*\)".*|\1|p')
+        OAUTHTOKEN=$(ibmcloud iam oauth-tokens | awk '{print $4;}')
+        #echo $OAUTHTOKEN
+        APPID_MANAGEMENT_URL=$(cat ./appid-key-temp.json | jq '.[].credentials.managementUrl' | sed 's/"//g' )
+        APPID_MANAGEMENT_URL_ALL_APPLICATIONS=${APPID_MANAGEMENT_URL}/applications
+        echo $APPID_MANAGEMENT_URL_ALL_APPLICATIONS
+        result=$(curl -H "Content-Type: application/json" -H "Authorization: Bearer $OAUTHTOKEN" $APPID_MANAGEMENT_URL_ALL_APPLICATIONS)
+        echo $result
+        APPID_CLIENT_ID=$(echo $result | sed -n 's|.*"clientId":"\([^"]*\)".*|\1|p')
+        echo $APPID_CLIENT_ID
 
         #####################
    

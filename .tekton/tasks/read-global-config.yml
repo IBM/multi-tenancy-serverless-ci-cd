@@ -44,14 +44,8 @@ spec:
         echo "read-global-config"        
         set -x
 
-        pwd
-        ls -la
-
         cd $(workspaces.workspace.path)/multi-tenancy
         #example: https://github.com/IBM/multi-tenancy/blob/main/configuration/global.json
-
-        pwd
-        ls -la
 
         CONFIG_FILE="configuration/global.json"
         CONFIG_FILE_ENV="configuration/global.env"
