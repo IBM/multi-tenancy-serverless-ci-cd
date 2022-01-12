@@ -60,6 +60,8 @@ spec:
           value: $(params.revision)
         - name: pipeline-debug
           value: $(params.pipeline-debug)
+        - name: directory-name
+          value: "multi-tenancy"
       workspaces:
         - name: workspace
           workspace: workspace-backend
@@ -75,13 +77,15 @@ spec:
         - name: ibmcloud-apikey-secret-key
           value: "toolchain-apikey"
         - name: repository
-          value: $(tasks.extract-repository-url-backend.results.extracted-value)-backend
+          value: $(tasks.extract-repository-url-backend.results.extracted-value)
         - name: branch
           value: $(params.branch)
         - name: revision
           value: $(params.revision)
         - name: pipeline-debug
           value: $(params.pipeline-debug)
+        - name: directory-name
+          value: "multi-tenancy-backend"
       workspaces:
         - name: workspace
           workspace: workspace-backend    
