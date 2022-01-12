@@ -94,4 +94,8 @@ spec:
         env
         echo "Toolchain ID"
         echo $TOOLCHAIN_GUID
-  
+        cat /toolchain/toolchain.json
+        TOOLCHAIN_GUID=$(cat /toolchain/toolchain.json | jq -r '.toolchain_guid')
+        env
+        echo "Toolchain ID"
+        echo $TOOLCHAIN_GUID
