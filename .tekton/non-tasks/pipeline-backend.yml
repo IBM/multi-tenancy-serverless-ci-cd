@@ -153,6 +153,8 @@ spec:
           value: "secure-properties"
         - name: ibmcloud-apikey-secret-key
           value: "toolchain-apikey"
+        - name: resource-group
+          value: $(params.resource-group)
       workspaces:
         - name: workspace-backend
           workspace: workspace-backend

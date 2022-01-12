@@ -35,7 +35,7 @@ readnik.md
 add-redirecturis.json
 add-roles.json
 add-application.json
-
+temp.json
 # Avoid ignoring Maven wrapper jar file (.jar files are usually ignored)
 !/.mvn/wrapper/maven-wrapper.jar
 
