@@ -104,11 +104,6 @@ spec:
 
         #####################
 
-        echo "REGISTRY_SECRET_NAME"
-        echo $(params.REGISTRY_SECRET_NAME)
-        echo "REGISTRY_URL"
-        echo $(params.REGISTRY_URL)
-
         ibmcloud ce registry update \
           --name $(params.REGISTRY_SECRET_NAME) \
           --server $(params.REGISTRY_URL) \

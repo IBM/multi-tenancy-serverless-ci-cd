@@ -84,6 +84,15 @@ spec:
 
         #####################
 
+        ibmcloud ce registry update \
+          --name $(params.REGISTRY_SECRET_NAME) \
+          --server $(params.REGISTRY_URL) \
+          --username "iamapikey" \
+          --password $API_KEY \
+          --email "multi-tenancy@example.com"
+
+        #####################
+
         ACTION="create"
         CHECK=$(ibmcloud ce application get --name $(params.APPLICATION_CONTAINER_NAME_FRONTEND) | awk '/Name:/ {print $2}')
         if [[ $CHECK == $(params.APPLICATION_CONTAINER_NAME_FRONTEND)* ]]
